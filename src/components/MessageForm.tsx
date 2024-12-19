@@ -27,8 +27,8 @@ export const MessageForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !message) {
-      toast.error("Please fill in all required fields");
+    if (!message) {
+      toast.error("Please enter a message");
       return;
     }
 
@@ -40,7 +40,6 @@ export const MessageForm = () => {
       id: Date.now().toString(),
     };
 
-    // In a real app, we'd save this to a database
     localStorage.setItem(`message-${messageData.id}`, JSON.stringify(messageData));
     navigate(`/share/${messageData.id}`);
   };
@@ -48,13 +47,12 @@ export const MessageForm = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto p-6">
       <div className="space-y-2">
-        <Label htmlFor="title">Title</Label>
+        <Label htmlFor="title">Title (Optional)</Label>
         <Input
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Enter your title"
-          required
+          placeholder="Enter your title (optional)"
         />
       </div>
 
@@ -71,7 +69,7 @@ export const MessageForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="image">Upload Image</Label>
+        <Label htmlFor="image">Upload Image (Optional)</Label>
         <Input
           id="image"
           type="file"
