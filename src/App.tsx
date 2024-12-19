@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import Share from "./pages/Share";
+import Message from "./pages/Message";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +17,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/share/:id" element={<Share />} />
+          <Route path="/message/:id" element={<Message />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
