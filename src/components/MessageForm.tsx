@@ -6,6 +6,7 @@ import { Label } from "./ui/label";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 export const MessageForm = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export const MessageForm = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message) {
       toast.error("Please enter a message");
@@ -33,15 +34,25 @@ export const MessageForm = () => {
     }
 
     const messageData = {
+      id: Date.now().toString(),
       title,
       message,
       template,
       image,
-      id: Date.now().toString(),
     };
 
-    localStorage.setItem(`message-${messageData.id}`, JSON.stringify(messageData));
-    navigate(`/share/${messageData.id}`);
+    try {
+      const { error } = await supabase
+        .from('messages')
+        .insert(messageData);
+
+      if (error) throw error;
+
+      navigate(`/share/${messageData.id}`);
+    } catch (error) {
+      console.error('Error saving message:', error);
+      toast.error("Failed to save message. Please try again.");
+    }
   };
 
   return (

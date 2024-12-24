@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 interface MessageData {
   title: string;
@@ -13,10 +14,26 @@ export const MessageDisplay = () => {
   const [data, setData] = useState<MessageData | null>(null);
 
   useEffect(() => {
-    const messageData = localStorage.getItem(`message-${id}`);
-    if (messageData) {
-      setData(JSON.parse(messageData));
-    }
+    const fetchMessage = async () => {
+      if (!id) return;
+      
+      const { data: message, error } = await supabase
+        .from('messages')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (error) {
+        console.error('Error fetching message:', error);
+        return;
+      }
+
+      if (message) {
+        setData(message);
+      }
+    };
+
+    fetchMessage();
   }, [id]);
 
   if (!data) return <div>Message not found</div>;
