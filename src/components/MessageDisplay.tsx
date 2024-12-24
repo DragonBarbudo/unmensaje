@@ -3,19 +3,31 @@ import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 
 interface MessageData {
-  title: string;
+  id: string;
+  title: string | null;
   message: string;
   template: string;
   image: string | null;
+  created_at: string;
 }
 
-export const MessageDisplay = () => {
+interface MessageDisplayProps {
+  messageData?: MessageData;
+}
+
+export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
   const { id } = useParams();
   const [data, setData] = useState<MessageData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchMessage = async () => {
+      if (messageData) {
+        setData(messageData);
+        setIsLoading(false);
+        return;
+      }
+
       if (!id) return;
       
       try {
@@ -39,7 +51,7 @@ export const MessageDisplay = () => {
     };
 
     fetchMessage();
-  }, [id]);
+  }, [id, messageData]);
 
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>Message not found</div>;
@@ -56,7 +68,7 @@ export const MessageDisplay = () => {
         {data.image && (
           <img
             src={data.image}
-            alt={data.title}
+            alt={data.title || ""}
             className="w-full h-[500px] object-cover"
           />
         )}
@@ -74,7 +86,7 @@ export const MessageDisplay = () => {
       {data.image && (
         <img
           src={data.image}
-          alt={data.title}
+          alt={data.title || ""}
           className="w-full h-64 object-cover rounded-lg mb-6"
         />
       )}

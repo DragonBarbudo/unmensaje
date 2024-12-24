@@ -7,6 +7,7 @@ import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { MessagePreview } from "./MessagePreview";
 
 export const MessageForm = () => {
   const navigate = useNavigate();
@@ -97,72 +98,83 @@ export const MessageForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto p-6">
-      <div className="space-y-2">
-        <Label htmlFor="title">Title (Optional)</Label>
-        <Input
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Enter your title (optional)"
-        />
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="message">Message</Label>
-        <Textarea
-          id="message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Write your message..."
-          required
-          className="min-h-[150px]"
-        />
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="image">Upload Image (Optional)</Label>
-        <Input
-          id="image"
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          className="cursor-pointer"
-        />
-        {image && (
-          <img
-            src={image}
-            alt="Preview"
-            className="mt-2 rounded-md max-h-40 object-cover"
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="space-y-2">
+          <Label htmlFor="title">Title (Optional)</Label>
+          <Input
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter your title (optional)"
           />
-        )}
-      </div>
+        </div>
 
-      <div className="space-y-2">
-        <Label>Select Template</Label>
-        <RadioGroup
-          value={template}
-          onValueChange={setTemplate}
-          className="grid grid-cols-3 gap-4"
-        >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="minimal" id="minimal" />
-            <Label htmlFor="minimal">Minimal</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="gradient" id="gradient" />
-            <Label htmlFor="gradient">Gradient</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="magazine" id="magazine" />
-            <Label htmlFor="magazine">Magazine</Label>
-          </div>
-        </RadioGroup>
-      </div>
+        <div className="space-y-2">
+          <Label htmlFor="message">Message</Label>
+          <Textarea
+            id="message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Write your message..."
+            required
+            className="min-h-[150px]"
+          />
+        </div>
 
-      <Button type="submit" className="w-full">
-        Create Message
-      </Button>
-    </form>
+        <div className="space-y-2">
+          <Label htmlFor="image">Upload Image (Optional)</Label>
+          <Input
+            id="image"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="cursor-pointer"
+          />
+          {image && (
+            <img
+              src={image}
+              alt="Preview"
+              className="mt-2 rounded-md max-h-40 object-cover"
+            />
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <Label>Select Template</Label>
+          <RadioGroup
+            value={template}
+            onValueChange={setTemplate}
+            className="grid grid-cols-3 gap-4"
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="minimal" id="minimal" />
+              <Label htmlFor="minimal">Minimal</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="gradient" id="gradient" />
+              <Label htmlFor="gradient">Gradient</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="magazine" id="magazine" />
+              <Label htmlFor="magazine">Magazine</Label>
+            </div>
+          </RadioGroup>
+        </div>
+
+        <Button type="submit" className="w-full">
+          Create Message
+        </Button>
+      </form>
+
+      <div className="sticky top-6">
+        <MessagePreview
+          title={title}
+          message={message}
+          template={template}
+          image={image}
+        />
+      </div>
+    </div>
   );
 };
