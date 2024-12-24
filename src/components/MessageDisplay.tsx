@@ -12,30 +12,36 @@ interface MessageData {
 export const MessageDisplay = () => {
   const { id } = useParams();
   const [data, setData] = useState<MessageData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchMessage = async () => {
       if (!id) return;
       
-      const { data: message, error } = await supabase
-        .from('messages')
-        .select('*')
-        .eq('id', id)
-        .single();
+      try {
+        const { data: message, error } = await supabase
+          .from('messages')
+          .select('*')
+          .eq('id', id)
+          .maybeSingle();
 
-      if (error) {
-        console.error('Error fetching message:', error);
-        return;
-      }
+        if (error) {
+          console.error('Error fetching message:', error);
+          return;
+        }
 
-      if (message) {
         setData(message);
+      } catch (error) {
+        console.error('Error fetching message:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchMessage();
   }, [id]);
 
+  if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>Message not found</div>;
 
   const templates = {
