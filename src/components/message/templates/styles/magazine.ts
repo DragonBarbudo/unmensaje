@@ -1,0 +1,1 @@
+export const magazineStyle = "relative text-white rounded-lg shadow-xl max-w-2xl mx-auto overflow-hidden";

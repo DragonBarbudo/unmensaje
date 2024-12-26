@@ -1,10 +1,19 @@
+import { minimalStyle } from "./styles/minimal";
+import { gradientStyle } from "./styles/gradient";
+import { magazineStyle } from "./styles/magazine";
+import { neonStyle } from "./styles/neon";
+import { sunsetStyle } from "./styles/sunset";
+import { forestStyle } from "./styles/forest";
+import { oceanStyle } from "./styles/ocean";
+import { experimentalStyle } from "./styles/experimental";
+
 export const templates = {
-  minimal: "bg-card text-card-foreground p-8 rounded-lg shadow-xl max-w-2xl mx-auto dark:shadow-none",
-  gradient: "gradient-purple text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto",
-  magazine: "relative text-white rounded-lg shadow-xl max-w-2xl mx-auto overflow-hidden",
-  neon: "gradient-neon text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto backdrop-blur-sm",
-  sunset: "gradient-sunset text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto",
-  forest: "gradient-forest text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto glass-effect",
-  ocean: "gradient-ocean text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto",
-  experimental: "bg-gradient-to-br from-[#8B5CF6] via-[#D946EF] to-[#F97316] text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto backdrop-blur-md border border-white/20"
+  minimal: minimalStyle,
+  gradient: gradientStyle,
+  magazine: magazineStyle,
+  neon: neonStyle,
+  sunset: sunsetStyle,
+  forest: forestStyle,
+  ocean: oceanStyle,
+  experimental: experimentalStyle
 };

@@ -1,0 +1,1 @@
+export const experimentalStyle = "bg-gradient-to-br from-[#8B5CF6] via-[#D946EF] to-[#F97316] text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto backdrop-blur-md border border-white/20";

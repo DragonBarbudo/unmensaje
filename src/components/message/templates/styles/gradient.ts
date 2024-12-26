@@ -1,0 +1,1 @@
+export const gradientStyle = "gradient-purple text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto";
