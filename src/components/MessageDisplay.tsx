@@ -65,6 +65,7 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
     sunset: "gradient-sunset text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto",
     forest: "gradient-forest text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto glass-effect",
     ocean: "gradient-ocean text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto",
+    experimental: "bg-gradient-to-br from-[#8B5CF6] via-[#D946EF] to-[#F97316] text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto backdrop-blur-md border border-white/20"
   };
 
   if (data.template === "magazine") {

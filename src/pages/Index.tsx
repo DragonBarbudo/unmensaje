@@ -8,9 +8,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background transition-colors py-12 px-4">
-      <LanguageSwitcher />
-      <ThemeToggle />
       <div className="max-w-5xl mx-auto">
+        <div className="flex justify-end gap-2 mb-8">
+          <LanguageSwitcher />
+          <ThemeToggle />
+        </div>
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
             {t('createMessage')}
