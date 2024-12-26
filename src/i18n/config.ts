@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
+      slogan: "Create messages easily",
       whereMessagesBecome: "Create beautiful messages that last forever",
       createMessage: "Create a Message",
       designBeautiful: "Design Beautiful Messages",
@@ -36,6 +37,7 @@ const resources = {
   },
   es: {
     translation: {
+      slogan: "Crea mensajitos fácilmente",
       whereMessagesBecome: "Crea mensajes hermosos que perduran para siempre",
       createMessage: "Crear un Mensaje",
       designBeautiful: "Diseña Mensajes Bellos",
@@ -68,6 +70,7 @@ const resources = {
   },
   fr: {
     translation: {
+      slogan: "Créez des messages facilement",
       whereMessagesBecome: "Créez des messages magnifiques qui durent pour toujours",
       createMessage: "Créer un Message",
       designBeautiful: "Concevez de Beaux Messages",
@@ -102,7 +105,7 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: "es", // Changed default language to Spanish
+  lng: "es",
   interpolation: {
     escapeValue: false,
   },

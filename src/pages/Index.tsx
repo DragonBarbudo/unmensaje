@@ -17,11 +17,11 @@ const Index = () => {
 
         {/* Hero Banner */}
         <div className="text-center mb-24">
-          <h1 className="text-7xl font-bold font-pacifico bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent mb-6">
+          <h1 className="text-4xl md:text-7xl font-bold font-pacifico bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent mb-6">
             UnMensaje.com
           </h1>
-          <p className="text-2xl text-muted-foreground font-light max-w-2xl mx-auto italic">
-            {t('whereMessagesBecome')} ✨
+          <p className="text-xl md:text-2xl text-muted-foreground font-light max-w-2xl mx-auto italic">
+            {t('slogan')} ✨
           </p>
         </div>
 
