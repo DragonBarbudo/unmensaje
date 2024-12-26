@@ -4,7 +4,7 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
-      whereMessagesBecome: "Where messages become magical moments",
+      whereMessagesBecome: "Create beautiful messages that last forever",
       createMessage: "Create a Message",
       designBeautiful: "Design Beautiful Messages",
       instantQR: "Instant QR Code",
@@ -22,15 +22,21 @@ const resources = {
       preview: "Preview",
       createButton: "Create Message",
       chooseFont: "Choose Font",
+      chooseTemplate: "Choose Template",
+      addImage: "Add Image",
+      clickToUpload: "Click or drag an image here",
       messagePlaceholder: "Write your message here...",
       titlePlaceholder: "Enter a title (optional)",
+      minimal: "Minimal",
+      gradient: "Gradient",
+      magazine: "Magazine",
       "Please enter a message": "Please enter a message",
       "Failed to save message. Please try again.": "Failed to save message. Please try again."
     },
   },
   es: {
     translation: {
-      whereMessagesBecome: "Donde los mensajes se convierten en momentos mágicos",
+      whereMessagesBecome: "Crea mensajes hermosos que perduran para siempre",
       createMessage: "Crear un Mensaje",
       designBeautiful: "Diseña Mensajes Bellos",
       instantQR: "Código QR Instantáneo",
@@ -48,15 +54,21 @@ const resources = {
       preview: "Vista Previa",
       createButton: "Crear Mensaje",
       chooseFont: "Elegir Fuente",
+      chooseTemplate: "Elige una Plantilla",
+      addImage: "Agregar Imagen",
+      clickToUpload: "Haz clic o arrastra una imagen aquí",
       messagePlaceholder: "Escribe tu mensaje aquí...",
       titlePlaceholder: "Ingresa un título (opcional)",
+      minimal: "Minimalista",
+      gradient: "Degradado",
+      magazine: "Revista",
       "Please enter a message": "Por favor ingresa un mensaje",
       "Failed to save message. Please try again.": "Error al guardar el mensaje. Por favor intenta de nuevo."
     },
   },
   fr: {
     translation: {
-      whereMessagesBecome: "Où les messages deviennent des moments magiques",
+      whereMessagesBecome: "Créez des messages magnifiques qui durent pour toujours",
       createMessage: "Créer un Message",
       designBeautiful: "Concevez de Beaux Messages",
       instantQR: "Code QR Instantané",
@@ -74,8 +86,14 @@ const resources = {
       preview: "Aperçu",
       createButton: "Créer le Message",
       chooseFont: "Choisir la Police",
+      chooseTemplate: "Choisir un Modèle",
+      addImage: "Ajouter une Image",
+      clickToUpload: "Cliquez ou glissez une image ici",
       messagePlaceholder: "Écrivez votre message ici...",
       titlePlaceholder: "Entrez un titre (optionnel)",
+      minimal: "Minimal",
+      gradient: "Dégradé",
+      magazine: "Magazine",
       "Please enter a message": "Veuillez saisir un message",
       "Failed to save message. Please try again.": "Échec de l'enregistrement du message. Veuillez réessayer."
     },
@@ -84,7 +102,7 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: "en",
+  lng: "es", // Changed default language to Spanish
   interpolation: {
     escapeValue: false,
   },
