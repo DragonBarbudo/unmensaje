@@ -9,9 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { MessagePreview } from "./MessagePreview";
 import { ImagePlus, Send, Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const MessageForm = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [template, setTemplate] = useState("minimal");
@@ -72,7 +74,7 @@ export const MessageForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message) {
-      toast.error("Please enter a message");
+      toast.error(t("Please enter a message"));
       return;
     }
 
@@ -94,7 +96,7 @@ export const MessageForm = () => {
       navigate(`/share/${messageData.id}`);
     } catch (error) {
       console.error('Error saving message:', error);
-      toast.error("Failed to save message. Please try again.");
+      toast.error(t("Failed to save message. Please try again."));
     }
   };
 
@@ -106,7 +108,7 @@ export const MessageForm = () => {
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Enter title (optional)"
+              placeholder={t('titlePlaceholder')}
               className="h-14 px-4 text-lg rounded-xl border-gray-200 focus:border-purple-500 focus:ring-purple-500"
             />
           </div>
@@ -115,14 +117,14 @@ export const MessageForm = () => {
             <Textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Write your message..."
+              placeholder={t('messagePlaceholder')}
               required
               className="min-h-[200px] px-4 py-3 text-lg rounded-xl border-gray-200 focus:border-purple-500 focus:ring-purple-500 resize-none"
             />
           </div>
 
           <div className="space-y-3">
-            <Label className="text-lg font-medium text-gray-700">Choose Template</Label>
+            <Label className="text-lg font-medium text-gray-700">{t('chooseTemplate')}</Label>
             <RadioGroup
               value={template}
               onValueChange={setTemplate}
@@ -139,7 +141,7 @@ export const MessageForm = () => {
                   className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-gray-200 bg-white p-4 hover:bg-gray-50 peer-checked:border-purple-500 peer-checked:bg-purple-50 cursor-pointer transition-all"
                 >
                   <Sparkles className="h-6 w-6 text-gray-600 mb-2" />
-                  <span className="text-sm font-medium">Minimal</span>
+                  <span className="text-sm font-medium">{t('minimal')}</span>
                 </Label>
               </div>
               <div className="relative">
@@ -153,7 +155,7 @@ export const MessageForm = () => {
                   className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-gray-200 bg-white p-4 hover:bg-gray-50 peer-checked:border-purple-500 peer-checked:bg-purple-50 cursor-pointer transition-all"
                 >
                   <div className="h-6 w-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 mb-2" />
-                  <span className="text-sm font-medium">Gradient</span>
+                  <span className="text-sm font-medium">{t('gradient')}</span>
                 </Label>
               </div>
               <div className="relative">
@@ -167,14 +169,14 @@ export const MessageForm = () => {
                   className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-gray-200 bg-white p-4 hover:bg-gray-50 peer-checked:border-purple-500 peer-checked:bg-purple-50 cursor-pointer transition-all"
                 >
                   <ImagePlus className="h-6 w-6 text-gray-600 mb-2" />
-                  <span className="text-sm font-medium">Magazine</span>
+                  <span className="text-sm font-medium">{t('magazine')}</span>
                 </Label>
               </div>
             </RadioGroup>
           </div>
 
           <div className="space-y-3">
-            <Label className="text-lg font-medium text-gray-700">Add Image (Optional)</Label>
+            <Label className="text-lg font-medium text-gray-700">{t('addImage')}</Label>
             <div className="relative">
               <Input
                 type="file"
@@ -196,7 +198,7 @@ export const MessageForm = () => {
                 ) : (
                   <div className="flex flex-col items-center text-gray-500">
                     <ImagePlus className="h-8 w-8 mb-2" />
-                    <span>Click to upload image</span>
+                    <span>{t('clickToUpload')}</span>
                   </div>
                 )}
               </Label>
@@ -208,12 +210,12 @@ export const MessageForm = () => {
           type="submit"
           className="w-full h-14 text-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-xl"
         >
-          <Send className="mr-2 h-5 w-5" /> Create Message
+          <Send className="mr-2 h-5 w-5" /> {t('createButton')}
         </Button>
       </form>
 
       <div className="sticky top-6">
-        <h2 className="text-lg font-semibold mb-4 text-gray-700">Preview</h2>
+        <h2 className="text-lg font-semibold mb-4 text-gray-700">{t('preview')}</h2>
         <div className="bg-white rounded-2xl p-8 shadow-xl">
           <MessagePreview
             title={title}

@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Share from "./pages/Share";
 import Message from "./pages/Message";
+import "@/i18n/config";
 
 const queryClient = new QueryClient();
 
