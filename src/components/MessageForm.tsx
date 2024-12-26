@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { MessagePreview } from "./MessagePreview";
-import { Send } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { TitleInput } from "./message/TitleInput";
 import { MessageTextarea } from "./message/MessageTextarea";
@@ -20,6 +20,7 @@ export const MessageForm = () => {
   const [template, setTemplate] = useState("minimal");
   const [image, setImage] = useState<string | null>(null);
   const [font, setFont] = useState("font-inter");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,6 +29,7 @@ export const MessageForm = () => {
       return;
     }
 
+    setIsLoading(true);
     const messageData = {
       id: Date.now().toString(),
       title,
@@ -48,12 +50,14 @@ export const MessageForm = () => {
     } catch (error) {
       console.error('Error saving message:', error);
       toast.error(t("Failed to save message. Please try again."));
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <form onSubmit={handleSubmit} className="space-y-8 bg-card text-card-foreground rounded-2xl p-8 shadow-xl dark:shadow-none">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <form onSubmit={handleSubmit} className="space-y-8 bg-card text-card-foreground rounded-2xl p-4 md:p-8 shadow-xl dark:shadow-none">
         <div className="space-y-4">
           <TitleInput value={title} onChange={setTitle} />
           <MessageTextarea value={message} onChange={setMessage} />
@@ -64,13 +68,19 @@ export const MessageForm = () => {
 
         <Button
           type="submit"
+          disabled={isLoading}
           className="w-full h-14 text-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-xl"
         >
-          <Send className="mr-2 h-5 w-5" /> {t('createButton')}
+          {isLoading ? (
+            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+          ) : (
+            <Send className="mr-2 h-5 w-5" />
+          )}
+          {t('createButton')}
         </Button>
       </form>
 
-      <div className="sticky top-6">
+      <div className="sticky top-6 hidden lg:block">
         <h2 className="text-lg font-semibold mb-4 text-foreground">{t('preview')}</h2>
         <div className="bg-card rounded-2xl p-8 shadow-xl dark:shadow-none">
           <MessagePreview

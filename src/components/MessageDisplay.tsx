@@ -6,6 +6,7 @@ import { templates } from "./message/templates/styles";
 import { MagazineTemplate } from "./message/templates/MagazineTemplate";
 import { StandardTemplate } from "./message/templates/StandardTemplate";
 import { MessageData } from "./message/templates/types";
+import { Loader2 } from "lucide-react";
 
 interface MessageDisplayProps {
   messageData?: MessageData;
@@ -54,13 +55,25 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
     fetchMessage();
   }, [id, messageData]);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (!data) return <div>Message not found</div>;
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[200px]">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+  
+  if (!data) return <div className="text-center p-4">Message not found</div>;
 
-  const isGradientTemplate = data.template !== "minimal";
+  const templateStyle = templates[data.template as keyof typeof templates] || templates.minimal;
+  const isGradientTemplate = !["minimal", "magazine"].includes(data.template);
 
   return (
-    <div className={cn(templates[data.template as keyof typeof templates], data.font)}>
+    <div className={cn(
+      templateStyle,
+      data.font,
+      "relative min-h-[200px] transition-all duration-300"
+    )}>
       {data.template === "magazine" ? (
         <MagazineTemplate data={data} />
       ) : (
