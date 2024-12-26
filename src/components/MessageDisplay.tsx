@@ -45,7 +45,6 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
         }
 
         if (message) {
-          // Ensure font property exists, default to 'font-inter' if not present
           setData({
             ...message,
             font: message.font || 'font-inter'
@@ -86,7 +85,7 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
           />
         )}
         <div className="absolute inset-0 gradient-overlay" />
-        <div className="absolute bottom-0 p-8 w-full">
+        <div className={cn("absolute bottom-0 p-8 w-full", data.font)}>
           <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
           <p className="text-lg">{data.message}</p>
         </div>
@@ -105,14 +104,10 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
           className="w-full h-64 object-cover rounded-lg mb-6"
         />
       )}
-      <h1 className={`text-4xl font-bold mb-4 ${
-        isGradientTemplate ? "text-white" : ""
-      }`}>
+      <h1 className={cn("text-4xl font-bold mb-4", isGradientTemplate ? "text-white" : "")}>
         {data.title}
       </h1>
-      <p className={`text-lg ${
-        isGradientTemplate ? "text-white" : ""
-      }`}>
+      <p className={cn("text-lg", isGradientTemplate ? "text-white" : "")}>
         {data.message}
       </p>
     </div>
