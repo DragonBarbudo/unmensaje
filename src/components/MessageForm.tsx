@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { MessagePreview } from "./MessagePreview";
+import { ImagePlus, Send, Sparkles } from "lucide-react";
 
 export const MessageForm = () => {
   const navigate = useNavigate();
@@ -99,81 +100,128 @@ export const MessageForm = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-2">
-          <Label htmlFor="title">Title (Optional)</Label>
-          <Input
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Enter your title (optional)"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="message">Message</Label>
-          <Textarea
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Write your message..."
-            required
-            className="min-h-[150px]"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="image">Upload Image (Optional)</Label>
-          <Input
-            id="image"
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            className="cursor-pointer"
-          />
-          {image && (
-            <img
-              src={image}
-              alt="Preview"
-              className="mt-2 rounded-md max-h-40 object-cover"
+      <form onSubmit={handleSubmit} className="space-y-8 bg-white rounded-2xl p-8 shadow-xl">
+        <div className="space-y-4">
+          <div className="relative">
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Enter title (optional)"
+              className="h-14 px-4 text-lg rounded-xl border-gray-200 focus:border-purple-500 focus:ring-purple-500"
             />
-          )}
+          </div>
+
+          <div className="relative">
+            <Textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Write your message..."
+              required
+              className="min-h-[200px] px-4 py-3 text-lg rounded-xl border-gray-200 focus:border-purple-500 focus:ring-purple-500 resize-none"
+            />
+          </div>
+
+          <div className="space-y-3">
+            <Label className="text-lg font-medium text-gray-700">Choose Template</Label>
+            <RadioGroup
+              value={template}
+              onValueChange={setTemplate}
+              className="grid grid-cols-3 gap-4"
+            >
+              <div className="relative">
+                <RadioGroupItem
+                  value="minimal"
+                  id="minimal"
+                  className="peer sr-only"
+                />
+                <Label
+                  htmlFor="minimal"
+                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-gray-200 bg-white p-4 hover:bg-gray-50 peer-checked:border-purple-500 peer-checked:bg-purple-50 cursor-pointer transition-all"
+                >
+                  <Sparkles className="h-6 w-6 text-gray-600 mb-2" />
+                  <span className="text-sm font-medium">Minimal</span>
+                </Label>
+              </div>
+              <div className="relative">
+                <RadioGroupItem
+                  value="gradient"
+                  id="gradient"
+                  className="peer sr-only"
+                />
+                <Label
+                  htmlFor="gradient"
+                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-gray-200 bg-white p-4 hover:bg-gray-50 peer-checked:border-purple-500 peer-checked:bg-purple-50 cursor-pointer transition-all"
+                >
+                  <div className="h-6 w-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 mb-2" />
+                  <span className="text-sm font-medium">Gradient</span>
+                </Label>
+              </div>
+              <div className="relative">
+                <RadioGroupItem
+                  value="magazine"
+                  id="magazine"
+                  className="peer sr-only"
+                />
+                <Label
+                  htmlFor="magazine"
+                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-gray-200 bg-white p-4 hover:bg-gray-50 peer-checked:border-purple-500 peer-checked:bg-purple-50 cursor-pointer transition-all"
+                >
+                  <ImagePlus className="h-6 w-6 text-gray-600 mb-2" />
+                  <span className="text-sm font-medium">Magazine</span>
+                </Label>
+              </div>
+            </RadioGroup>
+          </div>
+
+          <div className="space-y-3">
+            <Label className="text-lg font-medium text-gray-700">Add Image (Optional)</Label>
+            <div className="relative">
+              <Input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+                id="image-upload"
+              />
+              <Label
+                htmlFor="image-upload"
+                className="flex items-center justify-center h-32 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 hover:bg-gray-100 cursor-pointer transition-all"
+              >
+                {image ? (
+                  <img
+                    src={image}
+                    alt="Preview"
+                    className="h-full w-full object-cover rounded-xl"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center text-gray-500">
+                    <ImagePlus className="h-8 w-8 mb-2" />
+                    <span>Click to upload image</span>
+                  </div>
+                )}
+              </Label>
+            </div>
+          </div>
         </div>
 
-        <div className="space-y-2">
-          <Label>Select Template</Label>
-          <RadioGroup
-            value={template}
-            onValueChange={setTemplate}
-            className="grid grid-cols-3 gap-4"
-          >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="minimal" id="minimal" />
-              <Label htmlFor="minimal">Minimal</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="gradient" id="gradient" />
-              <Label htmlFor="gradient">Gradient</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="magazine" id="magazine" />
-              <Label htmlFor="magazine">Magazine</Label>
-            </div>
-          </RadioGroup>
-        </div>
-
-        <Button type="submit" className="w-full">
-          Create Message
+        <Button
+          type="submit"
+          className="w-full h-14 text-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-xl"
+        >
+          <Send className="mr-2 h-5 w-5" /> Create Message
         </Button>
       </form>
 
       <div className="sticky top-6">
-        <MessagePreview
-          title={title}
-          message={message}
-          template={template}
-          image={image}
-        />
+        <h2 className="text-lg font-semibold mb-4 text-gray-700">Preview</h2>
+        <div className="bg-white rounded-2xl p-8 shadow-xl">
+          <MessagePreview
+            title={title}
+            message={message}
+            template={template}
+            image={image}
+          />
+        </div>
       </div>
     </div>
   );
