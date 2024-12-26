@@ -4,13 +4,18 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { MessagePreview } from "./MessagePreview";
-import { Send, Loader2 } from "lucide-react";
+import { Send, Loader2, Settings2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { TitleInput } from "./message/TitleInput";
 import { MessageTextarea } from "./message/MessageTextarea";
 import { TemplateSelector } from "./message/TemplateSelector";
 import { ImageUploader } from "./message/ImageUploader";
 import { FontSelector } from "./message/FontSelector";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 export const MessageForm = () => {
   const navigate = useNavigate();
@@ -21,6 +26,7 @@ export const MessageForm = () => {
   const [image, setImage] = useState<string | null>(null);
   const [font, setFont] = useState("font-inter");
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,9 +67,28 @@ export const MessageForm = () => {
         <div className="space-y-4">
           <TitleInput value={title} onChange={setTitle} />
           <MessageTextarea value={message} onChange={setMessage} />
-          <TemplateSelector value={template} onChange={setTemplate} />
-          <FontSelector value={font} onChange={setFont} />
-          <ImageUploader image={image} onImageChange={setImage} />
+          
+          <Collapsible
+            open={isOpen}
+            onOpenChange={setIsOpen}
+            className="space-y-4"
+          >
+            <CollapsibleTrigger asChild>
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full flex items-center justify-center gap-2"
+              >
+                <Settings2 className="h-4 w-4" />
+                {t('moreOptions')}
+              </Button>
+            </CollapsibleTrigger>
+            <CollapsibleContent className="space-y-4">
+              <TemplateSelector value={template} onChange={setTemplate} />
+              <FontSelector value={font} onChange={setFont} />
+              <ImageUploader image={image} onImageChange={setImage} />
+            </CollapsibleContent>
+          </Collapsible>
         </div>
 
         <Button
