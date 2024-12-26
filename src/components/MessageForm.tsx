@@ -62,7 +62,7 @@ export const MessageForm = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 gap-8">
       <form onSubmit={handleSubmit} className="space-y-8 bg-card text-card-foreground rounded-2xl p-4 md:p-8 shadow-xl dark:shadow-none">
         <div className="space-y-4">
           <TitleInput value={title} onChange={setTitle} />
@@ -105,17 +105,14 @@ export const MessageForm = () => {
         </Button>
       </form>
 
-      <div className="sticky top-6 hidden lg:block">
-        <h2 className="text-lg font-semibold mb-4 text-foreground">{t('preview')}</h2>
-        <div className="bg-card rounded-2xl p-8 shadow-xl dark:shadow-none">
-          <MessagePreview
-            title={title}
-            message={message}
-            template={template}
-            image={image}
-            font={font}
-          />
-        </div>
+      <div className="bg-card rounded-2xl p-8 shadow-xl dark:shadow-none">
+        <MessagePreview
+          title={title}
+          message={message}
+          template={template}
+          image={image}
+          font={font}
+        />
       </div>
     </div>
   );
