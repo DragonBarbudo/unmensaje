@@ -49,7 +49,7 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
           setData({
             ...message,
             font: message.font || 'font-inter'
-          });
+          } as MessageData);
         }
       } catch (error) {
         console.error('Error fetching message:', error);
