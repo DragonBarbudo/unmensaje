@@ -3,6 +3,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useTranslation } from "react-i18next";
 import { QrCode, Share2, Palette, Globe2 } from "lucide-react";
+import { Logo } from "@/components/Logo";
 
 const Index = () => {
   const { t } = useTranslation();
@@ -15,15 +16,7 @@ const Index = () => {
           <ThemeToggle />
         </div>
 
-        {/* Hero Banner */}
-        <div className="text-center mb-24">
-          <h1 className="text-4xl md:text-7xl font-bold font-pacifico bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent mb-6">
-            UnMensaje.com
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground font-light max-w-2xl mx-auto italic">
-            {t('slogan')} ✨
-          </p>
-        </div>
+        <Logo />
 
         <div className="text-center mb-12">
           <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
