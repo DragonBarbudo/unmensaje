@@ -18,6 +18,14 @@ const resources = {
       createAndShare: "Create and share your messages with the world!",
       createdBy: "Created by",
       and: "and",
+      shareInStyle: "Share in Style",
+      preview: "Preview",
+      createButton: "Create Message",
+      chooseFont: "Choose Font",
+      messagePlaceholder: "Write your message here...",
+      titlePlaceholder: "Enter a title (optional)",
+      "Please enter a message": "Please enter a message",
+      "Failed to save message. Please try again.": "Failed to save message. Please try again."
     },
   },
   es: {
@@ -36,6 +44,14 @@ const resources = {
       createAndShare: "¡Crea y comparte tus mensajes con el mundo!",
       createdBy: "Creado por",
       and: "y",
+      shareInStyle: "Comparte con Estilo",
+      preview: "Vista Previa",
+      createButton: "Crear Mensaje",
+      chooseFont: "Elegir Fuente",
+      messagePlaceholder: "Escribe tu mensaje aquí...",
+      titlePlaceholder: "Ingresa un título (opcional)",
+      "Please enter a message": "Por favor ingresa un mensaje",
+      "Failed to save message. Please try again.": "Error al guardar el mensaje. Por favor intenta de nuevo."
     },
   },
   fr: {
@@ -54,6 +70,14 @@ const resources = {
       createAndShare: "Créez et partagez vos messages avec le monde !",
       createdBy: "Créé par",
       and: "et",
+      shareInStyle: "Partagez avec Style",
+      preview: "Aperçu",
+      createButton: "Créer le Message",
+      chooseFont: "Choisir la Police",
+      messagePlaceholder: "Écrivez votre message ici...",
+      titlePlaceholder: "Entrez un titre (optionnel)",
+      "Please enter a message": "Veuillez saisir un message",
+      "Failed to save message. Please try again.": "Échec de l'enregistrement du message. Veuillez réessayer."
     },
   },
 };
