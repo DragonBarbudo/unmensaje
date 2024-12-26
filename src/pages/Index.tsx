@@ -14,14 +14,26 @@ const Index = () => {
           <LanguageSwitcher />
           <ThemeToggle />
         </div>
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-            {t('createMessage')}
+
+        {/* Hero Banner */}
+        <div className="text-center mb-24">
+          <h1 className="text-7xl font-bold font-pacifico bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent mb-6">
+            UnMensaje.com
           </h1>
+          <p className="text-2xl text-muted-foreground font-light max-w-2xl mx-auto italic">
+            {t('whereMessagesBecome')} ✨
+          </p>
+        </div>
+
+        <div className="text-center mb-12">
+          <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+            {t('createMessage')}
+          </h2>
           <p className="text-foreground text-lg">
             {t('designBeautiful')}
           </p>
         </div>
+
         <MessageForm />
         
         {/* Features Section */}
