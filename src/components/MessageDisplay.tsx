@@ -2,16 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
-
-interface MessageData {
-  id: string;
-  title: string | null;
-  message: string;
-  template: string;
-  image: string | null;
-  font: string;
-  created_at: string;
-}
+import { templates } from "./message/templates/styles";
+import { MagazineTemplate } from "./message/templates/MagazineTemplate";
+import { StandardTemplate } from "./message/templates/StandardTemplate";
+import { MessageData } from "./message/templates/types";
 
 interface MessageDisplayProps {
   messageData?: MessageData;
@@ -63,53 +57,15 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>Message not found</div>;
 
-  const templates = {
-    minimal: "bg-card text-card-foreground p-8 rounded-lg shadow-xl max-w-2xl mx-auto dark:shadow-none",
-    gradient: "gradient-purple text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto",
-    magazine: "relative text-white rounded-lg shadow-xl max-w-2xl mx-auto overflow-hidden",
-    neon: "gradient-neon text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto backdrop-blur-sm",
-    sunset: "gradient-sunset text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto",
-    forest: "gradient-forest text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto glass-effect",
-    ocean: "gradient-ocean text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto",
-    experimental: "bg-gradient-to-br from-[#8B5CF6] via-[#D946EF] to-[#F97316] text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto backdrop-blur-md border border-white/20"
-  };
-
-  if (data.template === "magazine") {
-    return (
-      <div className={cn(templates.magazine, data.font)}>
-        {data.image && (
-          <img
-            src={data.image}
-            alt={data.title || ""}
-            className="w-full h-[500px] object-cover"
-          />
-        )}
-        <div className="absolute inset-0 gradient-overlay" />
-        <div className={cn("absolute bottom-0 p-8 w-full", data.font)}>
-          <h1 className="text-4xl font-bold mb-4">{data.title}</h1>
-          <p className="text-lg">{data.message}</p>
-        </div>
-      </div>
-    );
-  }
-
   const isGradientTemplate = data.template !== "minimal";
 
   return (
     <div className={cn(templates[data.template as keyof typeof templates], data.font)}>
-      {data.image && (
-        <img
-          src={data.image}
-          alt={data.title || ""}
-          className="w-full h-64 object-cover rounded-lg mb-6"
-        />
+      {data.template === "magazine" ? (
+        <MagazineTemplate data={data} />
+      ) : (
+        <StandardTemplate data={data} isGradientTemplate={isGradientTemplate} />
       )}
-      <h1 className={cn("text-4xl font-bold mb-4", isGradientTemplate ? "text-white" : "")}>
-        {data.title}
-      </h1>
-      <p className={cn("text-lg", isGradientTemplate ? "text-white" : "")}>
-        {data.message}
-      </p>
     </div>
   );
 };
