@@ -44,7 +44,13 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
           return;
         }
 
-        setData(message);
+        if (message) {
+          // Ensure font property exists, default to 'font-inter' if not present
+          setData({
+            ...message,
+            font: message.font || 'font-inter'
+          });
+        }
       } catch (error) {
         console.error('Error fetching message:', error);
       } finally {
