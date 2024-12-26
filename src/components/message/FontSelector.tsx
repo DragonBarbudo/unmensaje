@@ -9,12 +9,12 @@ interface FontSelectorProps {
 }
 
 const fonts = [
-  { name: 'Playfair Display', value: 'font-playfair', googleFont: 'Playfair+Display' },
-  { name: 'Montserrat', value: 'font-montserrat', googleFont: 'Montserrat' },
-  { name: 'Lora', value: 'font-lora', googleFont: 'Lora' },
-  { name: 'Source Sans 3', value: 'font-source', googleFont: 'Source+Sans+3' },
-  { name: 'Merriweather', value: 'font-merriweather', googleFont: 'Merriweather' },
-  { name: 'Roboto Slab', value: 'font-roboto-slab', googleFont: 'Roboto+Slab' },
+  { name: 'Afacad', value: 'font-afacad', googleFont: 'Afacad' },
+  { name: 'Work Sans', value: 'font-work-sans', googleFont: 'Work+Sans' },
+  { name: 'Teko', value: 'font-teko', googleFont: 'Teko' },
+  { name: 'Pacifico', value: 'font-pacifico', googleFont: 'Pacifico' },
+  { name: 'Caveat', value: 'font-caveat', googleFont: 'Caveat' },
+  { name: 'Acme', value: 'font-acme', googleFont: 'Acme' },
 ];
 
 export const FontSelector = ({ value, onChange }: FontSelectorProps) => {

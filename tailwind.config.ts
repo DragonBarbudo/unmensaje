@@ -19,12 +19,12 @@ export default {
     },
     extend: {
       fontFamily: {
-        playfair: ['Playfair Display', ...fontFamily.serif],
-        montserrat: ['Montserrat', ...fontFamily.sans],
-        lora: ['Lora', ...fontFamily.serif],
-        source: ['Source Sans 3', ...fontFamily.sans],
-        merriweather: ['Merriweather', ...fontFamily.serif],
-        'roboto-slab': ['Roboto Slab', ...fontFamily.serif],
+        afacad: ['Afacad', ...fontFamily.sans],
+        'work-sans': ['Work Sans', ...fontFamily.sans],
+        teko: ['Teko', ...fontFamily.sans],
+        pacifico: ['Pacifico', 'cursive'],
+        caveat: ['Caveat', 'cursive'],
+        acme: ['Acme', ...fontFamily.sans],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -75,26 +75,26 @@
   }
 }
 
-.font-playfair {
-  font-family: 'Playfair Display', serif;
+.font-afacad {
+  font-family: 'Afacad', sans-serif;
 }
 
-.font-montserrat {
-  font-family: 'Montserrat', sans-serif;
+.font-work-sans {
+  font-family: 'Work Sans', sans-serif;
 }
 
-.font-lora {
-  font-family: 'Lora', serif;
+.font-teko {
+  font-family: 'Teko', sans-serif;
 }
 
-.font-source {
-  font-family: 'Source Sans 3', sans-serif;
+.font-pacifico {
+  font-family: 'Pacifico', cursive;
 }
 
-.font-merriweather {
-  font-family: 'Merriweather', serif;
+.font-caveat {
+  font-family: 'Caveat', cursive;
 }
 
-.font-roboto-slab {
-  font-family: 'Roboto Slab', serif;
+.font-acme {
+  font-family: 'Acme', sans-serif;
 }
