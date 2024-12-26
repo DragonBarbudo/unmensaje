@@ -20,7 +20,8 @@ i18n.use(initReactI18next).init({
         "addImage": "Add Image (Optional)",
         "clickToUpload": "Click to upload image",
         "preview": "Preview",
-        "createButton": "Create Message"
+        "createButton": "Create Message",
+        "chooseFont": "Choose Font"
       }
     },
     es: {
@@ -38,7 +39,8 @@ i18n.use(initReactI18next).init({
         "addImage": "Agregar Imagen (Opcional)",
         "clickToUpload": "Haz clic para subir imagen",
         "preview": "Vista Previa",
-        "createButton": "Crear Mensaje"
+        "createButton": "Crear Mensaje",
+        "chooseFont": "Elegir Fuente"
       }
     },
     fr: {
@@ -56,7 +58,8 @@ i18n.use(initReactI18next).init({
         "addImage": "Ajouter une Image (Facultatif)",
         "clickToUpload": "Cliquez pour télécharger une image",
         "preview": "Aperçu",
-        "createButton": "Créer le Message"
+        "createButton": "Créer le Message",
+        "chooseFont": "Choisir la Police"
       }
     }
   },

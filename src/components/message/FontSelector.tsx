@@ -1,5 +1,5 @@
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 
@@ -13,6 +13,8 @@ const fonts = [
   { name: 'Montserrat', value: 'font-montserrat', googleFont: 'Montserrat' },
   { name: 'Lora', value: 'font-lora', googleFont: 'Lora' },
   { name: 'Source Sans 3', value: 'font-source', googleFont: 'Source+Sans+3' },
+  { name: 'Merriweather', value: 'font-merriweather', googleFont: 'Merriweather' },
+  { name: 'Roboto Slab', value: 'font-roboto-slab', googleFont: 'Roboto+Slab' },
 ];
 
 export const FontSelector = ({ value, onChange }: FontSelectorProps) => {
@@ -33,23 +35,24 @@ export const FontSelector = ({ value, onChange }: FontSelectorProps) => {
   return (
     <div className="space-y-3">
       <Label className="text-lg font-medium">{t('chooseFont')}</Label>
-      <ToggleGroup
-        type="single"
+      <RadioGroup
         value={value}
         onValueChange={onChange}
-        className="flex flex-wrap gap-2"
+        className="grid grid-cols-2 md:grid-cols-3 gap-4"
       >
         {fonts.map((font) => (
-          <ToggleGroupItem
-            key={font.value}
-            value={font.value}
-            className={`flex-1 min-w-[120px] h-16 ${font.value}`}
-            style={{ fontFamily: font.name }}
-          >
-            {font.name}
-          </ToggleGroupItem>
+          <div key={font.value} className="relative">
+            <RadioGroupItem value={font.value} id={font.value} className="peer sr-only" />
+            <Label
+              htmlFor={font.value}
+              className={`flex items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all ${font.value}`}
+              style={{ fontFamily: font.name }}
+            >
+              {font.name}
+            </Label>
+          </div>
         ))}
-      </ToggleGroup>
+      </RadioGroup>
     </div>
   );
 };

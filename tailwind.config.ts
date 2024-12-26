@@ -23,6 +23,8 @@ export default {
         montserrat: ['Montserrat', ...fontFamily.sans],
         lora: ['Lora', ...fontFamily.serif],
         source: ['Source Sans 3', ...fontFamily.sans],
+        merriweather: ['Merriweather', ...fontFamily.serif],
+        'roboto-slab': ['Roboto Slab', ...fontFamily.serif],
       },
       colors: {
         border: "hsl(var(--border))",
