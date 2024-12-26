@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { cn } from "@/lib/utils";
 
 interface MessageData {
   id: string;
@@ -57,9 +58,13 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
   if (!data) return <div>Message not found</div>;
 
   const templates = {
-    minimal: "bg-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto",
+    minimal: "bg-card text-card-foreground p-8 rounded-lg shadow-xl max-w-2xl mx-auto dark:shadow-none",
     gradient: "gradient-purple text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto",
     magazine: "relative text-white rounded-lg shadow-xl max-w-2xl mx-auto overflow-hidden",
+    neon: "gradient-neon text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto backdrop-blur-sm",
+    sunset: "gradient-sunset text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto",
+    forest: "gradient-forest text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto glass-effect",
+    ocean: "gradient-ocean text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto",
   };
 
   if (data.template === "magazine") {
@@ -81,8 +86,10 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
     );
   }
 
+  const isGradientTemplate = data.template !== "minimal";
+
   return (
-    <div className={templates[data.template as keyof typeof templates]}>
+    <div className={cn(templates[data.template as keyof typeof templates])}>
       {data.image && (
         <img
           src={data.image}
@@ -91,12 +98,12 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
         />
       )}
       <h1 className={`text-4xl font-bold mb-4 ${
-        data.template === "gradient" ? "text-white" : "text-gray-900"
+        isGradientTemplate ? "text-white" : ""
       }`}>
         {data.title}
       </h1>
       <p className={`text-lg ${
-        data.template === "gradient" ? "text-white" : "text-gray-700"
+        isGradientTemplate ? "text-white" : ""
       }`}>
         {data.message}
       </p>

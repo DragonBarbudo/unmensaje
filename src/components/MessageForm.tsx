@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { MessagePreview } from "./MessagePreview";
-import { ImagePlus, Send, Sparkles } from "lucide-react";
+import { ImagePlus, Send, Sparkles, Sunset, Trees, Waves, Zap } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export const MessageForm = () => {
@@ -102,14 +102,14 @@ export const MessageForm = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <form onSubmit={handleSubmit} className="space-y-8 bg-white rounded-2xl p-8 shadow-xl">
+      <form onSubmit={handleSubmit} className="space-y-8 bg-card text-card-foreground rounded-2xl p-8 shadow-xl dark:shadow-none">
         <div className="space-y-4">
           <div className="relative">
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder={t('titlePlaceholder')}
-              className="h-14 px-4 text-lg rounded-xl border-gray-200 focus:border-purple-500 focus:ring-purple-500"
+              className="h-14 px-4 text-lg rounded-xl border-input focus:border-primary focus:ring-primary"
             />
           </div>
 
@@ -119,16 +119,16 @@ export const MessageForm = () => {
               onChange={(e) => setMessage(e.target.value)}
               placeholder={t('messagePlaceholder')}
               required
-              className="min-h-[200px] px-4 py-3 text-lg rounded-xl border-gray-200 focus:border-purple-500 focus:ring-purple-500 resize-none"
+              className="min-h-[200px] px-4 py-3 text-lg rounded-xl border-input focus:border-primary focus:ring-primary resize-none"
             />
           </div>
 
           <div className="space-y-3">
-            <Label className="text-lg font-medium text-gray-700">{t('chooseTemplate')}</Label>
+            <Label className="text-lg font-medium">{t('chooseTemplate')}</Label>
             <RadioGroup
               value={template}
               onValueChange={setTemplate}
-              className="grid grid-cols-3 gap-4"
+              className="grid grid-cols-2 md:grid-cols-4 gap-4"
             >
               <div className="relative">
                 <RadioGroupItem
@@ -138,9 +138,9 @@ export const MessageForm = () => {
                 />
                 <Label
                   htmlFor="minimal"
-                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-gray-200 bg-white p-4 hover:bg-gray-50 peer-checked:border-purple-500 peer-checked:bg-purple-50 cursor-pointer transition-all"
+                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
                 >
-                  <Sparkles className="h-6 w-6 text-gray-600 mb-2" />
+                  <Sparkles className="h-6 w-6 mb-2" />
                   <span className="text-sm font-medium">{t('minimal')}</span>
                 </Label>
               </div>
@@ -152,7 +152,7 @@ export const MessageForm = () => {
                 />
                 <Label
                   htmlFor="gradient"
-                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-gray-200 bg-white p-4 hover:bg-gray-50 peer-checked:border-purple-500 peer-checked:bg-purple-50 cursor-pointer transition-all"
+                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
                 >
                   <div className="h-6 w-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 mb-2" />
                   <span className="text-sm font-medium">{t('gradient')}</span>
@@ -166,10 +166,66 @@ export const MessageForm = () => {
                 />
                 <Label
                   htmlFor="magazine"
-                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-gray-200 bg-white p-4 hover:bg-gray-50 peer-checked:border-purple-500 peer-checked:bg-purple-50 cursor-pointer transition-all"
+                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
                 >
-                  <ImagePlus className="h-6 w-6 text-gray-600 mb-2" />
+                  <ImagePlus className="h-6 w-6 mb-2" />
                   <span className="text-sm font-medium">{t('magazine')}</span>
+                </Label>
+              </div>
+              <div className="relative">
+                <RadioGroupItem
+                  value="neon"
+                  id="neon"
+                  className="peer sr-only"
+                />
+                <Label
+                  htmlFor="neon"
+                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
+                >
+                  <Zap className="h-6 w-6 mb-2" />
+                  <span className="text-sm font-medium">Neon</span>
+                </Label>
+              </div>
+              <div className="relative">
+                <RadioGroupItem
+                  value="sunset"
+                  id="sunset"
+                  className="peer sr-only"
+                />
+                <Label
+                  htmlFor="sunset"
+                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
+                >
+                  <Sunset className="h-6 w-6 mb-2" />
+                  <span className="text-sm font-medium">Sunset</span>
+                </Label>
+              </div>
+              <div className="relative">
+                <RadioGroupItem
+                  value="forest"
+                  id="forest"
+                  className="peer sr-only"
+                />
+                <Label
+                  htmlFor="forest"
+                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
+                >
+                  <Trees className="h-6 w-6 mb-2" />
+                  <span className="text-sm font-medium">Forest</span>
+                </Label>
+              </div>
+              <div className="relative">
+                <RadioGroupItem
+                  value="ocean"
+                  id="ocean"
+                  className="peer sr-only"
+                />
+                <Label
+                  htmlFor="ocean"
+                  className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
+                >
+                  <Waves className="h-6 w-6 mb-2" />
+                  <span className="text-sm font-medium">Ocean</span>
                 </Label>
               </div>
             </RadioGroup>
@@ -204,6 +260,7 @@ export const MessageForm = () => {
               </Label>
             </div>
           </div>
+
         </div>
 
         <Button
@@ -215,8 +272,8 @@ export const MessageForm = () => {
       </form>
 
       <div className="sticky top-6">
-        <h2 className="text-lg font-semibold mb-4 text-gray-700">{t('preview')}</h2>
-        <div className="bg-white rounded-2xl p-8 shadow-xl">
+        <h2 className="text-lg font-semibold mb-4 text-foreground">{t('preview')}</h2>
+        <div className="bg-card rounded-2xl p-8 shadow-xl dark:shadow-none">
           <MessagePreview
             title={title}
             message={message}
