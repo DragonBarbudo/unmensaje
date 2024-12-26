@@ -5,16 +5,17 @@ interface PreviewProps {
   message: string;
   template: string;
   image: string | null;
+  font: string;
 }
 
-export const MessagePreview = ({ title, message, template, image }: PreviewProps) => {
-  // Create a mock message object that matches the structure expected by MessageDisplay
+export const MessagePreview = ({ title, message, template, image, font }: PreviewProps) => {
   const previewData = {
     id: "preview",
     title,
     message,
     template,
     image,
+    font,
     created_at: new Date().toISOString(),
   };
 

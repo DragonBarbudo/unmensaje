@@ -10,6 +10,7 @@ import { TitleInput } from "./message/TitleInput";
 import { MessageTextarea } from "./message/MessageTextarea";
 import { TemplateSelector } from "./message/TemplateSelector";
 import { ImageUploader } from "./message/ImageUploader";
+import { FontSelector } from "./message/FontSelector";
 
 export const MessageForm = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ export const MessageForm = () => {
   const [message, setMessage] = useState("");
   const [template, setTemplate] = useState("minimal");
   const [image, setImage] = useState<string | null>(null);
+  const [font, setFont] = useState("font-inter");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +34,7 @@ export const MessageForm = () => {
       message,
       template,
       image,
+      font,
     };
 
     try {
@@ -55,6 +58,7 @@ export const MessageForm = () => {
           <TitleInput value={title} onChange={setTitle} />
           <MessageTextarea value={message} onChange={setMessage} />
           <TemplateSelector value={template} onChange={setTemplate} />
+          <FontSelector value={font} onChange={setFont} />
           <ImageUploader image={image} onImageChange={setImage} />
         </div>
 
@@ -74,6 +78,7 @@ export const MessageForm = () => {
             message={message}
             template={template}
             image={image}
+            font={font}
           />
         </div>
       </div>

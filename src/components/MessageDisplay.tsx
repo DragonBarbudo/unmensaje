@@ -9,6 +9,7 @@ interface MessageData {
   message: string;
   template: string;
   image: string | null;
+  font: string;
   created_at: string;
 }
 
@@ -70,7 +71,7 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
 
   if (data.template === "magazine") {
     return (
-      <div className={templates.magazine}>
+      <div className={cn(templates.magazine, data.font)}>
         {data.image && (
           <img
             src={data.image}
@@ -90,7 +91,7 @@ export const MessageDisplay = ({ messageData }: MessageDisplayProps) => {
   const isGradientTemplate = data.template !== "minimal";
 
   return (
-    <div className={cn(templates[data.template as keyof typeof templates])}>
+    <div className={cn(templates[data.template as keyof typeof templates], data.font)}>
       {data.image && (
         <img
           src={data.image}
