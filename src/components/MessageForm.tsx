@@ -4,18 +4,12 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { MessagePreview } from "./MessagePreview";
-import { Send, Loader2, Settings2, Sparkles } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { TitleInput } from "./message/TitleInput";
 import { MessageTextarea } from "./message/MessageTextarea";
-import { TemplateSelector } from "./message/TemplateSelector";
-import { ImageUploader } from "./message/ImageUploader";
-import { FontSelector } from "./message/FontSelector";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { AIImproveButton } from "./message/AIImproveButton";
+import { AdvancedOptions } from "./message/AdvancedOptions";
 
 export const MessageForm = () => {
   const navigate = useNavigate();
@@ -26,7 +20,6 @@ export const MessageForm = () => {
   const [image, setImage] = useState<string | null>(null);
   const [font, setFont] = useState("font-inter");
   const [isLoading, setIsLoading] = useState(false);
-  const [isImproving, setIsImproving] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -62,30 +55,6 @@ export const MessageForm = () => {
     }
   };
 
-  const improveWithAI = async () => {
-    if (!message) {
-      toast.error(t("Please enter a message first"));
-      return;
-    }
-
-    setIsImproving(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('improve-message', {
-        body: { message }
-      });
-
-      if (error) throw error;
-
-      setMessage(data.improvedText);
-      toast.success(t("Message improved successfully!"));
-    } catch (error) {
-      console.error('Error improving message:', error);
-      toast.error(t("Failed to improve message. Please try again."));
-    } finally {
-      setIsImproving(false);
-    }
-  };
-
   return (
     <div className="grid grid-cols-1 gap-8">
       <form onSubmit={handleSubmit} className="space-y-8 bg-card text-card-foreground rounded-2xl p-4 md:p-8 shadow-xl dark:shadow-none">
@@ -93,44 +62,19 @@ export const MessageForm = () => {
           <TitleInput value={title} onChange={setTitle} />
           <div className="relative">
             <MessageTextarea value={message} onChange={setMessage} />
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              className="absolute right-2 top-2 bg-background"
-              onClick={improveWithAI}
-              disabled={isImproving || !message}
-            >
-              {isImproving ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Sparkles className="h-4 w-4" />
-              )}
-              {t('Improve with AI')}
-            </Button>
+            <AIImproveButton message={message} onImproved={setMessage} />
           </div>
           
-          <Collapsible
-            open={isOpen}
+          <AdvancedOptions
+            isOpen={isOpen}
             onOpenChange={setIsOpen}
-            className="space-y-4"
-          >
-            <CollapsibleTrigger asChild>
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full flex items-center justify-center gap-2"
-              >
-                <Settings2 className="h-4 w-4" />
-                {t('moreOptions')}
-              </Button>
-            </CollapsibleTrigger>
-            <CollapsibleContent className="space-y-4">
-              <TemplateSelector value={template} onChange={setTemplate} />
-              <FontSelector value={font} onChange={setFont} />
-              <ImageUploader image={image} onImageChange={setImage} />
-            </CollapsibleContent>
-          </Collapsible>
+            template={template}
+            onTemplateChange={setTemplate}
+            font={font}
+            onFontChange={setFont}
+            image={image}
+            onImageChange={setImage}
+          />
         </div>
 
         <Button
