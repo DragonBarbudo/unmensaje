@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import "https://deno.land/x/xhr@0.1.0/mod.ts"
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -6,14 +7,16 @@ const corsHeaders = {
 }
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders })
   }
 
   try {
     const { prompt } = await req.json()
-    
-    const response = await fetch('https://api.openai.com/v1/images/generations', {
+    console.log('Generating image for prompt:', prompt)
+
+    const openAIResponse = await fetch('https://api.openai.com/v1/images/generations', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${Deno.env.get('OPENAI_API_KEY')}`,
@@ -24,14 +27,18 @@ serve(async (req) => {
         prompt,
         n: 1,
         size: "1024x1024",
+        response_format: "url"
       }),
     })
 
-    const data = await response.json()
-    
-    if (!response.ok) {
-      throw new Error(data.error?.message || 'Failed to generate image')
+    if (!openAIResponse.ok) {
+      const errorData = await openAIResponse.json()
+      console.error('OpenAI API error:', errorData)
+      throw new Error(errorData.error?.message || 'Failed to generate image')
     }
+
+    const data = await openAIResponse.json()
+    console.log('Image generated successfully')
 
     return new Response(
       JSON.stringify({ imageUrl: data.data[0].url }),
