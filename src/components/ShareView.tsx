@@ -1,15 +1,20 @@
 import QRCode from "react-qr-code";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import { Download, Share2 } from "lucide-react";
+import { Download, Share2, Edit } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ShareViewProps {
   messageId: string;
 }
 
 export const ShareView = ({ messageId }: ShareViewProps) => {
+  const navigate = useNavigate();
   const shareUrl = `${window.location.origin}/message/${messageId}`;
+  const [isLoading, setIsLoading] = useState(false);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(shareUrl);
@@ -60,6 +65,30 @@ export const ShareView = ({ messageId }: ShareViewProps) => {
     }
   };
 
+  const handleReturn = async () => {
+    setIsLoading(true);
+    try {
+      const { data: message, error } = await supabase
+        .from('messages')
+        .select('*')
+        .eq('id', messageId)
+        .single();
+      
+      if (error) throw error;
+      
+      navigate('/', { 
+        state: { 
+          editMessage: message 
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching message:', error);
+      toast.error("Failed to load message for editing");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="max-w-md mx-auto p-6 space-y-6">
       <div className="flex justify-end mb-4">
@@ -102,6 +131,16 @@ export const ShareView = ({ messageId }: ShareViewProps) => {
             className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
           >
             Copy Link
+          </Button>
+
+          <Button
+            onClick={handleReturn}
+            variant="outline"
+            className="w-full"
+            disabled={isLoading}
+          >
+            <Edit className="mr-2 h-4 w-4" />
+            Return to Edit
           </Button>
         </div>
       </div>

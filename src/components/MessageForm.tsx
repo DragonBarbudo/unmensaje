@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { MessagePreview } from "./MessagePreview";
 import { Send, Loader2 } from "lucide-react";
@@ -13,6 +13,7 @@ import { AdvancedOptions } from "./message/AdvancedOptions";
 
 export const MessageForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
@@ -21,6 +22,19 @@ export const MessageForm = () => {
   const [font, setFont] = useState("font-inter");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const editMessage = location.state?.editMessage;
+    if (editMessage) {
+      setTitle(editMessage.title || "");
+      setMessage(editMessage.message || "");
+      setTemplate(editMessage.template || "minimal");
+      setImage(editMessage.image || null);
+      setFont(editMessage.font || "font-inter");
+      // Clear the state after loading
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
