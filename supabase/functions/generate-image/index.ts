@@ -23,7 +23,7 @@ serve(async (req) => {
         model: "dall-e-3",
         prompt,
         n: 1,
-        size: "512x512",
+        size: "1024x1024",
       }),
     })
 
@@ -38,6 +38,7 @@ serve(async (req) => {
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     )
   } catch (error) {
+    console.error('Error in generate-image function:', error)
     return new Response(
       JSON.stringify({ error: error.message }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
