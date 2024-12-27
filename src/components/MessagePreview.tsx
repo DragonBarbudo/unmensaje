@@ -1,4 +1,5 @@
 import { MessageDisplay } from "./MessageDisplay";
+import { useTranslation } from "react-i18next";
 
 interface PreviewProps {
   title: string;
@@ -9,6 +10,8 @@ interface PreviewProps {
 }
 
 export const MessagePreview = ({ title, message, template, image, font }: PreviewProps) => {
+  const { t } = useTranslation();
+  
   const previewData = {
     id: "preview",
     title,
@@ -21,7 +24,7 @@ export const MessagePreview = ({ title, message, template, image, font }: Previe
 
   return (
     <div className="w-full">
-      <h2 className="text-lg font-semibold mb-4">Live Preview</h2>
+      <h2 className="text-lg font-semibold mb-4">{t("Live Preview")}</h2>
       <MessageDisplay messageData={previewData} />
     </div>
   );

@@ -6,6 +6,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
 
 interface ShareViewProps {
   messageId: string;
@@ -13,12 +14,13 @@ interface ShareViewProps {
 
 export const ShareView = ({ messageId }: ShareViewProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const shareUrl = `${window.location.origin}/message/${messageId}`;
   const [isLoading, setIsLoading] = useState(false);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(shareUrl);
-    toast.success("Link copied to clipboard!");
+    toast.success(t("Link copied to clipboard!"));
   };
 
   const downloadQR = () => {
@@ -41,7 +43,7 @@ export const ShareView = ({ messageId }: ShareViewProps) => {
       downloadLink.href = pngFile;
       downloadLink.click();
       
-      toast.success("QR Code downloaded successfully!");
+      toast.success(t("QR Code downloaded successfully!"));
     };
 
     img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
@@ -51,11 +53,11 @@ export const ShareView = ({ messageId }: ShareViewProps) => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'UnMensaje.com - Shared Message',
-          text: 'Check out this message I created!',
+          title: t("UnMensaje.com - Shared Message"),
+          text: t("Check out this message I created!"),
           url: shareUrl
         });
-        toast.success("Shared successfully!");
+        toast.success(t("Shared successfully!"));
       } catch (err) {
         console.error('Error sharing:', err);
         copyToClipboard();
@@ -83,7 +85,7 @@ export const ShareView = ({ messageId }: ShareViewProps) => {
       });
     } catch (error) {
       console.error('Error fetching message:', error);
-      toast.error("Failed to load message for editing");
+      toast.error(t("Failed to load message for editing"));
     } finally {
       setIsLoading(false);
     }
@@ -113,7 +115,7 @@ export const ShareView = ({ messageId }: ShareViewProps) => {
               className="w-full"
             >
               <Download className="mr-2 h-4 w-4" />
-              Download QR
+              {t("Download QR")}
             </Button>
             
             <Button 
@@ -122,7 +124,7 @@ export const ShareView = ({ messageId }: ShareViewProps) => {
               className="w-full"
             >
               <Share2 className="mr-2 h-4 w-4" />
-              Share Link
+              {t("Share Link")}
             </Button>
           </div>
           
@@ -130,7 +132,7 @@ export const ShareView = ({ messageId }: ShareViewProps) => {
             onClick={copyToClipboard} 
             className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
           >
-            Copy Link
+            {t("Copy Link")}
           </Button>
 
           <Button
@@ -140,7 +142,7 @@ export const ShareView = ({ messageId }: ShareViewProps) => {
             disabled={isLoading}
           >
             <Edit className="mr-2 h-4 w-4" />
-            Return to Edit
+            {t("Return to Edit")}
           </Button>
         </div>
       </div>
