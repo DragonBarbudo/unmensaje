@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { MessagePreview } from "./MessagePreview";
-import { Send, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { TitleInput } from "./message/TitleInput";
 import { MessageTextarea } from "./message/MessageTextarea";
 import { AIImproveButton } from "./message/AIImproveButton";
 import { AdvancedOptions } from "./message/AdvancedOptions";
+import { FormActions } from "./message/FormActions";
 
 export const MessageForm = () => {
   const navigate = useNavigate();
@@ -31,7 +30,6 @@ export const MessageForm = () => {
       setTemplate(editMessage.template || "minimal");
       setImage(editMessage.image || null);
       setFont(editMessage.font || "font-inter");
-      // Clear the state after loading
       window.history.replaceState({}, document.title);
     }
   }, [location.state]);
@@ -92,18 +90,7 @@ export const MessageForm = () => {
           />
         </div>
 
-        <Button
-          type="submit"
-          disabled={isLoading}
-          className="w-full h-14 text-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-xl"
-        >
-          {isLoading ? (
-            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-          ) : (
-            <Send className="mr-2 h-5 w-5" />
-          )}
-          {t('createButton')}
-        </Button>
+        <FormActions isLoading={isLoading} />
       </form>
 
       <div className="bg-card rounded-2xl p-8 shadow-xl dark:shadow-none">

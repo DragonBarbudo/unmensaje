@@ -1,12 +1,11 @@
-import QRCode from "react-qr-code";
-import { Button } from "./ui/button";
-import { toast } from "sonner";
-import { Download, Share2, Edit } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
+import { QRCodeSection } from "./share/QRCodeSection";
+import { ShareActions } from "./share/ShareActions";
+import { toast } from "sonner";
 
 interface ShareViewProps {
   messageId: string;
@@ -98,53 +97,15 @@ export const ShareView = ({ messageId }: ShareViewProps) => {
       </div>
       
       <div className="bg-card p-6 rounded-lg shadow-lg dark:shadow-none space-y-6">
-        <div className="qr-code bg-white p-4 rounded-lg">
-          <QRCode
-            value={shareUrl}
-            className="w-full h-auto max-w-[300px] mx-auto"
-          />
-        </div>
-        
-        <div className="space-y-4">
-          <p className="text-sm text-muted-foreground break-all">{shareUrl}</p>
-          
-          <div className="grid grid-cols-2 gap-4">
-            <Button 
-              onClick={downloadQR}
-              variant="outline"
-              className="w-full"
-            >
-              <Download className="mr-2 h-4 w-4" />
-              {t("Download QR")}
-            </Button>
-            
-            <Button 
-              onClick={shareMessage}
-              variant="outline"
-              className="w-full"
-            >
-              <Share2 className="mr-2 h-4 w-4" />
-              {t("Share Link")}
-            </Button>
-          </div>
-          
-          <Button 
-            onClick={copyToClipboard} 
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-          >
-            {t("Copy Link")}
-          </Button>
-
-          <Button
-            onClick={handleReturn}
-            variant="outline"
-            className="w-full"
-            disabled={isLoading}
-          >
-            <Edit className="mr-2 h-4 w-4" />
-            {t("Return to Edit")}
-          </Button>
-        </div>
+        <QRCodeSection shareUrl={shareUrl} />
+        <ShareActions
+          shareUrl={shareUrl}
+          onDownloadQR={downloadQR}
+          onShare={shareMessage}
+          onCopyLink={copyToClipboard}
+          onReturn={handleReturn}
+          isLoading={isLoading}
+        />
       </div>
     </div>
   );
