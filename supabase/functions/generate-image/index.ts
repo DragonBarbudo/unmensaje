@@ -14,8 +14,14 @@ serve(async (req) => {
 
   try {
     const { prompt } = await req.json()
-    console.log('Generating image for prompt:', prompt)
+    console.log('Received prompt:', prompt)
 
+    if (!prompt) {
+      console.error('No prompt provided')
+      throw new Error('No prompt provided')
+    }
+
+    console.log('Calling OpenAI API...')
     const openAIResponse = await fetch('https://api.openai.com/v1/images/generations', {
       method: 'POST',
       headers: {
@@ -27,28 +33,50 @@ serve(async (req) => {
         prompt,
         n: 1,
         size: "1024x1024",
-        response_format: "url"
+        response_format: "url",
+        quality: "standard"
       }),
     })
 
     if (!openAIResponse.ok) {
       const errorData = await openAIResponse.json()
       console.error('OpenAI API error:', errorData)
-      throw new Error(errorData.error?.message || 'Failed to generate image')
+      return new Response(
+        JSON.stringify({ error: errorData.error?.message || 'Failed to generate image' }),
+        { 
+          status: openAIResponse.status,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      )
     }
 
     const data = await openAIResponse.json()
-    console.log('Image generated successfully')
+    console.log('Successfully received OpenAI response')
 
+    if (!data.data?.[0]?.url) {
+      console.error('Invalid response format from OpenAI:', data)
+      throw new Error('Invalid response from image generation API')
+    }
+
+    console.log('Returning image URL to client')
     return new Response(
       JSON.stringify({ imageUrl: data.data[0].url }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200
+      }
     )
   } catch (error) {
     console.error('Error in generate-image function:', error)
     return new Response(
-      JSON.stringify({ error: error.message }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
+      JSON.stringify({ 
+        error: error.message,
+        details: 'An error occurred while generating the image'
+      }),
+      { 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 500
+      }
     )
   }
 })
