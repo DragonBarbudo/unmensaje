@@ -1,1 +1,1 @@
-export const minimalStyle = "bg-card text-card-foreground p-8 rounded-lg shadow-xl max-w-2xl mx-auto dark:shadow-none";
+export const minimalStyle = "bg-card text-card-foreground p-8 rounded-lg shadow-xl max-w-2xl mx-auto dark:shadow-none border border-border";

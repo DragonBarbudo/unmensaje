@@ -1,1 +1,1 @@
-export const gradientStyle = "gradient-purple text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto";
+export const gradientStyle = "bg-gradient-to-r from-purple-600 to-pink-600 text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto";

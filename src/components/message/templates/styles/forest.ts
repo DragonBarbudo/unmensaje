@@ -1,1 +1,1 @@
-export const forestStyle = "gradient-forest text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto glass-effect";
+export const forestStyle = "bg-gradient-to-br from-emerald-500 to-green-700 text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto";

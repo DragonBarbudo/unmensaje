@@ -1,1 +1,1 @@
-export const oceanStyle = "gradient-ocean text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto";
+export const oceanStyle = "bg-gradient-to-br from-blue-400 to-cyan-600 text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto";

@@ -1,1 +1,1 @@
-export const sunsetStyle = "gradient-sunset text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto";
+export const sunsetStyle = "bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600 text-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto";
