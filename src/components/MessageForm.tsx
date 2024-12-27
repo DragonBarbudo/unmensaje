@@ -70,22 +70,13 @@ export const MessageForm = () => {
 
     setIsImproving(true);
     try {
-      const response = await fetch(
-        'https://caijygaslduihfxzgtrw.supabase.co/functions/v1/improve-message',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.SUPABASE_ANON_KEY}`,
-          },
-          body: JSON.stringify({ message }),
-        }
-      );
+      const { data, error } = await supabase.functions.invoke('improve-message', {
+        body: { message }
+      });
 
-      if (!response.ok) throw new Error('Failed to improve message');
+      if (error) throw error;
 
-      const { improvedText } = await response.json();
-      setMessage(improvedText);
+      setMessage(data.improvedText);
       toast.success(t("Message improved successfully!"));
     } catch (error) {
       console.error('Error improving message:', error);
