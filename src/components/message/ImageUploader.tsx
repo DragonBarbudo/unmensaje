@@ -82,12 +82,8 @@ export const ImageUploader = ({ image, onImageChange, message }: ImageUploaderPr
 
       if (error) throw error;
 
-      const response = await fetch(data.imageUrl);
-      const blob = await response.blob();
-      const file = new File([blob], "generated-image.webp", { type: "image/webp" });
-      const webpImage = await convertToWebP(file);
-      
-      onImageChange(webpImage);
+      // Directly use the URL from OpenAI instead of converting it
+      onImageChange(data.imageUrl);
       toast.success(t("Image generated successfully!"));
     } catch (error) {
       console.error('Error generating image:', error);
