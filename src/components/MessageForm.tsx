@@ -74,6 +74,7 @@ export const MessageForm = () => {
             onFontChange={setFont}
             image={image}
             onImageChange={setImage}
+            message={message}
           />
         </div>
 

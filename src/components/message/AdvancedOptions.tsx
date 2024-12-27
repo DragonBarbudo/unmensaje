@@ -19,6 +19,7 @@ interface AdvancedOptionsProps {
   onFontChange: (font: string) => void;
   image: string | null;
   onImageChange: (image: string | null) => void;
+  message: string;
 }
 
 export const AdvancedOptions = ({
@@ -30,6 +31,7 @@ export const AdvancedOptions = ({
   onFontChange,
   image,
   onImageChange,
+  message,
 }: AdvancedOptionsProps) => {
   const { t } = useTranslation();
 
@@ -52,7 +54,7 @@ export const AdvancedOptions = ({
       <CollapsibleContent className="space-y-4">
         <TemplateSelector value={template} onChange={onTemplateChange} />
         <FontSelector value={font} onChange={onFontChange} />
-        <ImageUploader image={image} onImageChange={onImageChange} />
+        <ImageUploader image={image} onImageChange={onImageChange} message={message} />
       </CollapsibleContent>
     </Collapsible>
   );
