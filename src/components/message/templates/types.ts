@@ -1,7 +1,7 @@
 export interface MessageData {
   id: string;
   title: string | null;
-  message: string;
+  message: string | JSX.Element;
   template: string;
   image: string | null;
   font: string;
