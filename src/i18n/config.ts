@@ -48,6 +48,7 @@ const resources = {
       "Live Preview": "Live Preview",
       "Check out this message I created!": "Check out this message I created!",
       "UnMensaje.com - Shared Message": "UnMensaje.com - Shared Message",
+      "Here will be your awesome message": "Here will be your awesome message",
     },
   },
   es: {
@@ -96,6 +97,7 @@ const resources = {
       "Live Preview": "Vista Previa",
       "Check out this message I created!": "¡Mira este mensaje que he creado!",
       "UnMensaje.com - Shared Message": "UnMensaje.com - Mensaje Compartido",
+      "Here will be your awesome message": "Aquí estará tu increíble mensaje",
     },
   },
   fr: {
@@ -144,6 +146,7 @@ const resources = {
       "Live Preview": "Aperçu en Direct",
       "Check out this message I created!": "Regardez ce message que j'ai créé !",
       "UnMensaje.com - Shared Message": "UnMensaje.com - Message Partagé",
+      "Here will be your awesome message": "Ici sera votre superbe message",
     },
   },
 };

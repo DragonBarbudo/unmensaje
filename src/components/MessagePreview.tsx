@@ -15,7 +15,7 @@ export const MessagePreview = ({ title, message, template, image, font }: Previe
   const previewData = {
     id: "preview",
     title,
-    message,
+    message: message || t("Here will be your awesome message"),
     template,
     image,
     font,
