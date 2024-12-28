@@ -1,5 +1,6 @@
 import { MessageDisplay } from "./MessageDisplay";
 import { useTranslation } from "react-i18next";
+import { Edit } from "lucide-react";
 
 interface PreviewProps {
   title: string;
@@ -15,7 +16,14 @@ export const MessagePreview = ({ title, message, template, image, font }: Previe
   const previewData = {
     id: "preview",
     title,
-    message: message || t("Here will be your awesome message"),
+    message: message || (
+      <div className="flex flex-col items-center justify-center space-y-4 py-8">
+        <Edit className="w-12 h-12 text-muted-foreground animate-pulse" />
+        <span className="text-2xl font-bold text-muted-foreground">
+          {t("Here will be your awesome message")}
+        </span>
+      </div>
+    ),
     template,
     image,
     font,
