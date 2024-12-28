@@ -2,6 +2,16 @@ import { MessageDisplay } from "./MessageDisplay";
 import { useTranslation } from "react-i18next";
 import { Edit } from "lucide-react";
 
+interface MessageData {
+  id: string;
+  title: string | null;
+  message: string | JSX.Element;
+  template: string;
+  image: string | null;
+  font: string;
+  created_at: string;
+}
+
 interface PreviewProps {
   title: string;
   message: string;
@@ -13,7 +23,7 @@ interface PreviewProps {
 export const MessagePreview = ({ title, message, template, image, font }: PreviewProps) => {
   const { t } = useTranslation();
   
-  const previewData = {
+  const previewData: MessageData = {
     id: "preview",
     title,
     message: message || (

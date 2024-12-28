@@ -38,14 +38,14 @@ export const FontSelector = ({ value, onChange }: FontSelectorProps) => {
       <RadioGroup
         value={value}
         onValueChange={onChange}
-        className="grid grid-cols-2 md:grid-cols-3 gap-4"
+        className="grid grid-cols-3 md:grid-cols-6 gap-2"
       >
         {fonts.map((font) => (
           <div key={font.value} className="relative">
             <RadioGroupItem value={font.value} id={font.value} className="peer sr-only" />
             <Label
               htmlFor={font.value}
-              className={`flex items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all ${font.value}`}
+              className={`flex items-center justify-center h-12 rounded-xl border-2 border-input bg-background hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all text-sm ${font.value}`}
               style={{ fontFamily: font.name }}
             >
               {font.name}

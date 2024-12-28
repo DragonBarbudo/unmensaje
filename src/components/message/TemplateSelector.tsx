@@ -17,86 +17,78 @@ export const TemplateSelector = ({ value, onChange }: TemplateSelectorProps) => 
       <RadioGroup
         value={value}
         onValueChange={onChange}
-        className="grid grid-cols-2 md:grid-cols-4 gap-4"
+        className="grid grid-cols-4 md:grid-cols-8 gap-2"
       >
         <div className="relative">
           <RadioGroupItem value="minimal" id="minimal" className="peer sr-only" />
           <Label
             htmlFor="minimal"
-            className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
+            className="flex items-center justify-center h-12 w-12 rounded-xl border-2 border-input bg-background hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
           >
-            <Sparkles className="h-6 w-6 mb-2" />
-            <span className="text-sm font-medium">{t('minimal')}</span>
+            <Sparkles className="h-6 w-6" />
           </Label>
         </div>
         <div className="relative">
           <RadioGroupItem value="gradient" id="gradient" className="peer sr-only" />
           <Label
             htmlFor="gradient"
-            className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
+            className="flex items-center justify-center h-12 w-12 rounded-xl border-2 border-input bg-background hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
           >
-            <div className="h-6 w-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 mb-2" />
-            <span className="text-sm font-medium">{t('gradient')}</span>
+            <div className="h-6 w-6 rounded-full bg-gradient-to-r from-purple-500 to-pink-500" />
           </Label>
         </div>
         <div className="relative">
           <RadioGroupItem value="magazine" id="magazine" className="peer sr-only" />
           <Label
             htmlFor="magazine"
-            className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
+            className="flex items-center justify-center h-12 w-12 rounded-xl border-2 border-input bg-background hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
           >
-            <ImagePlus className="h-6 w-6 mb-2" />
-            <span className="text-sm font-medium">{t('magazine')}</span>
+            <ImagePlus className="h-6 w-6" />
           </Label>
         </div>
         <div className="relative">
           <RadioGroupItem value="neon" id="neon" className="peer sr-only" />
           <Label
             htmlFor="neon"
-            className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
+            className="flex items-center justify-center h-12 w-12 rounded-xl border-2 border-input bg-background hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
           >
-            <Zap className="h-6 w-6 mb-2" />
-            <span className="text-sm font-medium">Neon</span>
+            <Zap className="h-6 w-6" />
           </Label>
         </div>
         <div className="relative">
           <RadioGroupItem value="sunset" id="sunset" className="peer sr-only" />
           <Label
             htmlFor="sunset"
-            className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
+            className="flex items-center justify-center h-12 w-12 rounded-xl border-2 border-input bg-background hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
           >
-            <Sunset className="h-6 w-6 mb-2" />
-            <span className="text-sm font-medium">Sunset</span>
+            <Sunset className="h-6 w-6" />
           </Label>
         </div>
         <div className="relative">
           <RadioGroupItem value="forest" id="forest" className="peer sr-only" />
           <Label
             htmlFor="forest"
-            className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
+            className="flex items-center justify-center h-12 w-12 rounded-xl border-2 border-input bg-background hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
           >
-            <Trees className="h-6 w-6 mb-2" />
-            <span className="text-sm font-medium">Forest</span>
+            <Trees className="h-6 w-6" />
           </Label>
         </div>
         <div className="relative">
           <RadioGroupItem value="ocean" id="ocean" className="peer sr-only" />
           <Label
             htmlFor="ocean"
-            className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
+            className="flex items-center justify-center h-12 w-12 rounded-xl border-2 border-input bg-background hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
           >
-            <Waves className="h-6 w-6 mb-2" />
-            <span className="text-sm font-medium">Ocean</span>
+            <Waves className="h-6 w-6" />
           </Label>
         </div>
         <div className="relative">
           <RadioGroupItem value="experimental" id="experimental" className="peer sr-only" />
           <Label
             htmlFor="experimental"
-            className="flex flex-col items-center justify-center h-24 rounded-xl border-2 border-input bg-background p-4 hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
+            className="flex items-center justify-center h-12 w-12 rounded-xl border-2 border-input bg-background hover:bg-muted peer-checked:border-primary peer-checked:bg-primary/10 cursor-pointer transition-all"
           >
-            <Palette className="h-6 w-6 mb-2" />
-            <span className="text-sm font-medium">Experimental</span>
+            <Palette className="h-6 w-6" />
           </Label>
         </div>
       </RadioGroup>
