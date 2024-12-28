@@ -12,13 +12,13 @@ export const StandardTemplate = ({ data, isGradientTemplate }: MessageTemplatePr
         />
       )}
       <h1 className={cn(
-        "text-2xl md:text-4xl font-bold mb-4",
+        "text-3xl md:text-5xl font-bold mb-6",
         isGradientTemplate ? "text-white" : ""
       )}>
         {data.title}
       </h1>
       <p className={cn(
-        "text-base md:text-lg whitespace-pre-wrap",
+        "text-lg md:text-xl whitespace-pre-wrap",
         isGradientTemplate ? "text-white" : ""
       )}>
         {data.message}

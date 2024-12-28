@@ -16,10 +16,10 @@ export const MagazineTemplate = ({ data }: MessageTemplateProps) => {
         "absolute bottom-0 p-4 md:p-8 w-full",
         data.font
       )}>
-        <h1 className="text-2xl md:text-4xl font-bold mb-4 text-white">
+        <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white">
           {data.title}
         </h1>
-        <p className="text-base md:text-lg text-white/90 whitespace-pre-wrap">
+        <p className="text-lg md:text-xl text-white/90 whitespace-pre-wrap">
           {data.message}
         </p>
       </div>
