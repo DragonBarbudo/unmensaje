@@ -21,6 +21,10 @@ serve(async (req) => {
       throw new Error('No prompt provided')
     }
 
+    // Sanitize and enhance the prompt
+    const sanitizedPrompt = `Create a safe, family-friendly image: ${prompt}`
+    console.log('Sanitized prompt:', sanitizedPrompt)
+
     console.log('Calling OpenAI API...')
     const openAIResponse = await fetch('https://api.openai.com/v1/images/generations', {
       method: 'POST',
@@ -30,17 +34,33 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         model: "dall-e-3",
-        prompt,
+        prompt: sanitizedPrompt,
         n: 1,
         size: "1024x1024",
         response_format: "url",
-        quality: "standard"
+        quality: "standard",
+        style: "natural" // Adding natural style for safer generations
       }),
     })
 
     if (!openAIResponse.ok) {
       const errorData = await openAIResponse.json()
       console.error('OpenAI API error:', errorData)
+      
+      // Handle content filter specifically
+      if (errorData.error?.message?.includes('content filter')) {
+        return new Response(
+          JSON.stringify({ 
+            error: 'Your image request could not be processed. Please try a different description.',
+            details: 'Content filter activated'
+          }),
+          { 
+            status: 400,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          }
+        )
+      }
+      
       return new Response(
         JSON.stringify({ error: errorData.error?.message || 'Failed to generate image' }),
         { 
