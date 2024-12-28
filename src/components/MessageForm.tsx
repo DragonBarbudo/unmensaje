@@ -9,6 +9,7 @@ import { MessageTextarea } from "./message/MessageTextarea";
 import { AIImproveButton } from "./message/AIImproveButton";
 import { AdvancedOptions } from "./message/AdvancedOptions";
 import { FormActions } from "./message/FormActions";
+import { isSpam } from "@/utils/antiSpam";
 
 export const MessageForm = () => {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ export const MessageForm = () => {
   const [font, setFont] = useState("font-inter");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
+  const [formStartTime] = useState(Date.now());
 
   useEffect(() => {
     const editMessage = location.state?.editMessage;
@@ -42,16 +45,30 @@ export const MessageForm = () => {
     }
 
     setIsLoading(true);
-    const messageData = {
-      id: Date.now().toString(),
-      title,
-      message,
-      template,
-      image,
-      font,
-    };
 
     try {
+      // Check for spam
+      const spamCheck = await isSpam({
+        title,
+        message,
+        honeypot,
+        timestamp: formStartTime,
+      });
+
+      if (spamCheck.isSpam) {
+        toast.error(t("Your message was flagged as spam. Please try again later."));
+        return;
+      }
+
+      const messageData = {
+        id: Date.now().toString(),
+        title,
+        message,
+        template,
+        image,
+        font,
+      };
+
       const { error } = await supabase
         .from('messages')
         .insert(messageData);
@@ -76,6 +93,18 @@ export const MessageForm = () => {
             <MessageTextarea value={message} onChange={setMessage} />
             <AIImproveButton message={message} onImproved={setMessage} />
           </div>
+          
+          {/* Honeypot field - hidden from real users */}
+          <input
+            type="text"
+            name="website"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            style={{ display: 'none' }}
+            tabIndex={-1}
+            aria-hidden="true"
+            autoComplete="off"
+          />
           
           <AdvancedOptions
             isOpen={isOpen}
