@@ -8,14 +8,23 @@ import i18n from "@/i18n/config";
 import Index from "./pages/Index";
 import Share from "./pages/Share";
 import Message from "./pages/Message";
+import { StaticPrerender } from "./components/StaticPrerender";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      cacheTime: 1000 * 60 * 30, // 30 minutes
+    },
+  },
+});
 
 const App = () => (
   <I18nextProvider i18n={i18n}>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <TooltipProvider delayDuration={0}>
+          <StaticPrerender />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/share/:id" element={<Share />} />

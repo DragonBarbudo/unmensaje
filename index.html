@@ -8,6 +8,12 @@
     <meta name="keywords" content="message creator, QR code messages, digital messages, online messages, message sharing, message templates" />
     <meta name="author" content="DragonBarbudo & Talacha Digital" />
     
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/src/index.css" as="style">
+    <link rel="preload" href="/src/main.tsx" as="script">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://unmensaje.com/" />
@@ -26,9 +32,24 @@
     <link rel="icon" type="image/png" href="/favicon.ico" />
     
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Montserrat:wght@400;500;600;700&family=Lora:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&family=Raleway:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Static Content for SEO -->
+    <noscript>
+      <div style="padding: 2rem; text-align: center;">
+        <h1>UnMensaje.com - Create and Share Beautiful Messages</h1>
+        <p>Create, design, and share beautiful messages with QR codes.</p>
+        <p>Choose from multiple templates and fonts to make your message unique.</p>
+        <p>Features:</p>
+        <ul style="list-style: none; padding: 0;">
+          <li>✨ Beautiful Templates</li>
+          <li>🎨 Custom Fonts</li>
+          <li>📱 QR Code Sharing</li>
+          <li>🌐 Multi-language Support</li>
+        </ul>
+        <p>Please enable JavaScript to use all features of UnMensaje.com</p>
+      </div>
+    </noscript>
   </head>
 
   <body>
