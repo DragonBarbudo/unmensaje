@@ -68,8 +68,8 @@ export const MessageForm = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 gap-8">
-      <form onSubmit={handleSubmit} className="space-y-8 bg-card text-card-foreground rounded-2xl p-4 md:p-8 shadow-xl dark:shadow-none">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <form onSubmit={handleSubmit} className="space-y-8 bg-card text-card-foreground rounded-2xl p-4 md:p-8 shadow-xl dark:shadow-none order-1 md:order-none">
         <div className="space-y-4">
           <TitleInput value={title} onChange={setTitle} />
           <div className="relative">
@@ -93,7 +93,7 @@ export const MessageForm = () => {
         <FormActions isLoading={isLoading} />
       </form>
 
-      <div className="bg-card rounded-2xl p-8 shadow-xl dark:shadow-none">
+      <div className="bg-card rounded-2xl p-8 shadow-xl dark:shadow-none sticky top-8 order-2 md:order-none">
         <MessagePreview
           title={title}
           message={message}
