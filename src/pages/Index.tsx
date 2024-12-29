@@ -18,6 +18,7 @@ const Index = () => {
         </div>
 
         <Logo />
+        <MessageCounter />
 
         <div className="text-center mb-12">
           <h2 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
@@ -27,8 +28,6 @@ const Index = () => {
             {t('designBeautiful')}
           </p>
         </div>
-
-        <MessageCounter />
 
         <MessageForm />
         
