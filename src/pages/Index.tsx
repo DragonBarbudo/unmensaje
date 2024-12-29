@@ -4,6 +4,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { useTranslation } from "react-i18next";
 import { QrCode, Share2, Palette, Globe2 } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { MessageCounter } from "@/components/MessageCounter";
 
 const Index = () => {
   const { t } = useTranslation();
@@ -28,6 +29,8 @@ const Index = () => {
         </div>
 
         <MessageForm />
+        
+        <MessageCounter />
         
         {/* Features Section */}
         <section className="mt-24 mb-16">
