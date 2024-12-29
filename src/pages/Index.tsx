@@ -28,9 +28,9 @@ const Index = () => {
           </p>
         </div>
 
-        <MessageForm />
-        
         <MessageCounter />
+
+        <MessageForm />
         
         {/* Features Section */}
         <section className="mt-24 mb-16">
